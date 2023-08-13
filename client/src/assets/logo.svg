@@ -1,0 +1,19 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+  <!-- The long bottom stroke for the letter "L" -->
+  <path d="M20,90 L120,90" stroke="black" stroke-width="5" fill="none" />
+
+  <!-- Letter "L" -->
+  <text x="20" y="90" font-family="Arial" font-size="40" fill="black">L</text>
+
+  <!-- Letter "E" -->
+  <text x="50" y="60" font-family="Arial" font-size="40" fill="black">E</text>
+
+  <!-- Letter "A" -->
+  <text x="80" y="50" font-family="Arial" font-size="40" fill="black">A</text>
+
+  <!-- Letter "R" -->
+  <text x="110" y="40" font-family="Arial" font-size="40" fill="black">R</text>
+
+  <!-- Letter "N" -->
+  <text x="140" y="30" font-family="Arial" font-size="40" fill="black">N</text>
+</svg>
