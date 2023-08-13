@@ -13,7 +13,16 @@ html {
 * {
   transition: all 0.1s ease-in-out;
 }
+::-moz-selection {
+  /* Code for Firefox */
+  background: #214d76;
+  color: white;
+}
 
+::selection {
+  background: #214d76;
+  color: white;
+}
 /* COLORS */
 .logoName {
   background: radial-gradient(
@@ -28,7 +37,20 @@ html {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -moz-transition: all 0.2 ease-in-out;
+  -o-transition: all 0.2 ease-in-out;
+  transition: all 0.2 ease-in-out;
+  -webkit-transition: all 0.2 ease-in-out;
 }
+
+.logoIcon:hover .logoName {
+  text-shadow: 0px 0px 10px white;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
 .text-gradient {
   background: linear-gradient(to top right, #ff47e7 0%, #33bacf 100%);
   background-clip: text;

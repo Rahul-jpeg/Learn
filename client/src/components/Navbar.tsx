@@ -38,6 +38,7 @@ export const Navbar = () => {
           }}
         >
           <IconButton /* LOGO AND NAME */
+            className="logoIcon group"
             sx={{
               width: "220px",
               height: "80px",
@@ -69,7 +70,7 @@ export const Navbar = () => {
                 sx={{
                   color: "white",
                 }}
-                className="hover:animate-pulse"
+                className="group-hover:animate-pulse"
               />
               <Typography
                 variant="h4"
