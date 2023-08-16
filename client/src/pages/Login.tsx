@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import { userUsername } from "../store/selectors/user";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { userState } from "../store/atoms/user";
+import { loginStatus, userState } from "../store/atoms/user";
 import { useNavigate } from "react-router-dom";
 import Error from "./Error";
 import { errorState } from "../store/atoms/axios";
@@ -14,6 +14,8 @@ const Login = () => {
   const setUsername = useSetRecoilState(userState);
   const navigate = useNavigate();
   const [err, setErr] = useRecoilState(errorState);
+  const setLoginStatus = useSetRecoilState(loginStatus);
+  const isLoggedIn = useRecoilValue(loginStatus);
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername({
@@ -34,6 +36,7 @@ const Login = () => {
       });
       const token = response.data.token;
       localStorage.setItem("authToken", token);
+      setLoginStatus(true);
       navigate("/courses");
     } catch (e) {
       setErr(true);

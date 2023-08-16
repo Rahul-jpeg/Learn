@@ -5,12 +5,19 @@ import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "../styles/index.css";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { loginStatus } from "../store/atoms/user";
 
 export const Navbar = () => {
-  const isLoggedIn = useRecoilValue(loginStatus);
+  const isLoggedIn = useRecoilState(loginStatus);
   const navigate = useNavigate();
+  const setisLoggedIn = useSetRecoilState(loginStatus);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setisLoggedIn(false);
+    navigate("/");
+  };
 
   return (
     /* NAVBAR */
@@ -197,6 +204,7 @@ export const Navbar = () => {
                   justifyContent: "space-between",
                   gap: "2px",
                 }}
+                onClick={() => handleLogout()}
                 disableRipple
               >
                 <Box className="icon-wrapper">

@@ -60,7 +60,7 @@ export const allCourses = async (req: Request, res: Response) => {
         if (outputCourses.length !== 0) {
             return res.status(200).json({ Courses: outputCourses });
         } else {
-            return res.json({ Message: "No courses available :(" })
+            return res.status(404).json({ Message: "No courses available :(" })
         }
     } catch (err) {
         if (err instanceof Error) {

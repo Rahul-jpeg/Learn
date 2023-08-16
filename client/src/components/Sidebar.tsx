@@ -20,7 +20,7 @@ const Sidebar = () => {
             <IconButton disableRipple>
               <SearchOutlinedIcon className="text-dimWhite" />
             </IconButton>
-            <div className="text-dimWhite text-center font-light text-sm w-14 h-6 rounded-md absolute translate-x-12 bg-gray-800 opacity-0 group-hover:opacity-100 cursor-default">
+            <div className="text-dimWhite text-center font-light text-sm w-14 h-6 rounded-md absolute translate-x-12 bg-gray-800 opacity-0 group-hover:opacity-100 cursor-default pointer-events-none">
               Search
             </div>
           </div>
@@ -33,7 +33,7 @@ const Sidebar = () => {
             <IconButton disableRipple>
               <FolderSpecialOutlinedIcon className="text-dimWhite" />
             </IconButton>
-            <div className="text-dimWhite text-center font-light text-sm w-14 h-6 rounded-md absolute translate-x-12 translate-y-2 bg-gray-800 opacity-0 group-hover:opacity-100 cursor-default">
+            <div className="text-dimWhite text-center font-light text-sm w-14 h-6 rounded-md absolute translate-x-12 translate-y-2 bg-gray-800 opacity-0 group-hover:opacity-100 cursor-default pointer-events-none">
               Owned
             </div>
           </div>
@@ -46,7 +46,7 @@ const Sidebar = () => {
             <IconButton disableRipple>
               <MenuBookIcon className="text-dimWhite" />
             </IconButton>
-            <div className="text-dimWhite text-center font-light text-sm w-14 h-6 rounded-md absolute translate-x-12 bg-gray-800 opacity-0 group-hover:opacity-100 cursor-default">
+            <div className="text-dimWhite text-center font-light text-sm w-14 h-6 rounded-md absolute translate-x-12 bg-gray-800 opacity-0 group-hover:opacity-100 cursor-default pointer-events-none">
               Browse
             </div>
           </div>
