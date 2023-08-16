@@ -7,7 +7,6 @@ import Login from "./pages/Login.tsx";
 import AllCourses from "./pages/AllCourses.tsx";
 import MyCourses from "./pages/MyCourses.tsx";
 import Purchase from "./pages/Purchase.tsx";
-// import Error from "./pages/Error.tsx";
 import { RecoilRoot } from "recoil";
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
           <Route path="/courses" Component={AllCourses} />
           <Route path="/mycourses" Component={MyCourses} />
           <Route path="/purchase" Component={Purchase} />
-          {/* <Route path="/error" Component={Error} /> */}
         </Routes>
       </Router>
     </RecoilRoot>
