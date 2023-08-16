@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -6,9 +5,11 @@ import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "../styles/index.css";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { loginStatus } from "../store/atoms/user";
 
 export const Navbar = () => {
-  const [isLoggedIn] = useState();
+  const isLoggedIn = useRecoilValue(loginStatus);
   const navigate = useNavigate();
 
   return (
@@ -19,11 +20,12 @@ export const Navbar = () => {
       marginTop={0}
       overflow={"hidden"}
       zIndex={"100"}
+      width={"100vw"}
     >
       <AppBar
         position="static"
         sx={{
-          width: "100vw",
+          width: "100%",
           background: "transparent",
           boxShadow: "none",
           marginTop: "0",

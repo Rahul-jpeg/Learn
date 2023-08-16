@@ -1,5 +1,48 @@
 import { Tilt } from "react-tilt";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+import { userUsername } from "../store/selectors/user";
+import axios from "axios";
+import { ChangeEvent, useState } from "react";
+import { userState } from "../store/atoms/user";
+import { useNavigate } from "react-router-dom";
+import Error from "./Error";
+import { errorState } from "../store/atoms/axios";
+
 const Login = () => {
+  const [password, setPassword] = useState("");
+  const username = useRecoilValue(userUsername);
+  const setUsername = useSetRecoilState(userState);
+  const navigate = useNavigate();
+  const [err, setErr] = useRecoilState(errorState);
+
+  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername({
+      isLoading: false,
+      userUsername: e.target.value,
+    });
+  };
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/user/login", {
+        username,
+        password,
+      });
+      const token = response.data.token;
+      localStorage.setItem("authToken", token);
+      navigate("/courses");
+    } catch (e) {
+      setErr(true);
+    }
+  };
+
+  if (err) {
+    return <Error />;
+  }
   return (
     <div className="bg-primary h-[100%] w-[100%] overflow-hidden fixed ">
       <div className="flex flex-col justify-center items-center pt-20">
@@ -18,6 +61,7 @@ const Login = () => {
                     type="text"
                     placeholder="Username"
                     id="username"
+                    onChange={handleUsernameChange}
                   />
                 </div>
                 <div className="flex items-center border-b border-dimWhite py-2">
@@ -26,9 +70,10 @@ const Login = () => {
                     type="password"
                     placeholder="Password"
                     id="password"
+                    onChange={handlePasswordChange}
                   />
                 </div>
-                <div className="box-1 mt-16">
+                <div className="box-1 mt-16" onClick={handleSubmit}>
                   <div className="btn btn-one">
                     <a className="no-underline text-white">Submit</a>
                   </div>

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;1,100&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,6 +10,7 @@ html {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #00040f;
 }
 * {
   transition: all 0.1s ease-in-out;
@@ -66,6 +68,10 @@ html {
 .pink__gradient {
   background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
   filter: blur(240px);
+}
+
+.blue_grad_noblur {
+  background: linear-gradient(360deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
 }
 
 .white__gradient {
