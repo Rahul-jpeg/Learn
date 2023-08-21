@@ -12,8 +12,8 @@ export interface Course {
     __v: number
 }
 
-export const courseState = atom<{ isLoading: boolean, course: null | Course }>({
-    key: 'courseState',
+export const courseAtom = atom<{ isLoading: boolean, course: null | Course }>({
+    key: 'courseAtom',
     default: {
         isLoading: true,
         course: null

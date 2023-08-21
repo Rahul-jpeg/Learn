@@ -11,6 +11,7 @@ import User from "../models/user.js";
 import Course from "../models/course.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 /* GET */
 export const currentUserInfo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -46,7 +47,17 @@ export const getMyCourses = (req, res) => __awaiter(void 0, void 0, void 0, func
             return res.status(404).json({ Message: "User not found" });
         }
         const purchasedCourses = user.purchasedCourses;
-        res.status(200).json({ Courses: purchasedCourses });
+        // Use Promise.all to await all asynchronous operations
+        const filteredCourses = yield Promise.all(purchasedCourses.map((courseId) => __awaiter(void 0, void 0, void 0, function* () {
+            const course = yield Course.findById(courseId);
+            if (course && course.published === true) {
+                return course;
+            }
+            return null;
+        })));
+        // Remove null values (unpublished courses) from the filteredCourses array
+        const publishedCourses = filteredCourses.filter(course => course !== null);
+        res.status(200).json({ Courses: publishedCourses });
     }
     catch (err) {
         if (err instanceof Error) {
@@ -137,4 +148,33 @@ export const purchaseCourse = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
     yield User.findByIdAndUpdate(userId, { $push: { purchasedCourses: course._id } });
     res.status(201).json({ Message: "Course purchased successfully" });
+});
+export const purchaseStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.headers.user;
+    if (!userId) {
+        return res.status(404).json({ Error: "User doesn't exist. Possibly logged out" });
+    }
+    const courseId = req.params.courseId;
+    const user = yield User.findById(userId);
+    if (!user) {
+        return res.sendStatus(500);
+    }
+    const purchasedCourses = user.purchasedCourses;
+    const id = new mongoose.Types.ObjectId(courseId);
+    const status = purchasedCourses.includes(id);
+    return res.status(200).json({ status: status });
+});
+export const getUserSpecificCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const courseId = req.params.courseId;
+        const course = yield Course.findById(courseId);
+        if (!course)
+            return res.status(404).json({ Message: "Course not found" });
+        return res.json({ course });
+    }
+    catch (err) {
+        if (err instanceof Error) {
+            return res.status(500).json({ Error: err.message });
+        }
+    }
 });

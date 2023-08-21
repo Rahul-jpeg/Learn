@@ -5,7 +5,7 @@ import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { userState } from "../store/atoms/user";
 import { useNavigate } from "react-router-dom";
-import Error from "./Error";
+import Error from "../components/Error";
 import { errorState } from "../store/atoms/axios";
 
 const Signup = () => {
@@ -33,7 +33,7 @@ const Signup = () => {
         password,
       });
       const token = response.data.token;
-      localStorage.setItem("authToken", token);
+      sessionStorage.setItem("authToken", token);
       navigate("/courses");
     } catch (e) {
       setErr(true);

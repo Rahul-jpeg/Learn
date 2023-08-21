@@ -5,7 +5,7 @@ import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { loginStatus, userState } from "../store/atoms/user";
 import { useNavigate } from "react-router-dom";
-import Error from "./Error";
+import Error from "../components/Error";
 import { errorState } from "../store/atoms/axios";
 
 const Login = () => {
@@ -15,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [err, setErr] = useRecoilState(errorState);
   const setLoginStatus = useSetRecoilState(loginStatus);
-  const isLoggedIn = useRecoilValue(loginStatus);
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername({
@@ -35,7 +34,7 @@ const Login = () => {
         password,
       });
       const token = response.data.token;
-      localStorage.setItem("authToken", token);
+      sessionStorage.setItem("authToken", token);
       setLoginStatus(true);
       navigate("/courses");
     } catch (e) {

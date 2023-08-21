@@ -5,19 +5,26 @@ import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "../styles/index.css";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { loginStatus } from "../store/atoms/user";
+import { useEffect } from "react";
 
 export const Navbar = () => {
-  const isLoggedIn = useRecoilState(loginStatus);
+  const [isLoggedIn, setisLoggedIn] = useRecoilState(loginStatus);
   const navigate = useNavigate();
-  const setisLoggedIn = useSetRecoilState(loginStatus);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("id");
     setisLoggedIn(false);
     navigate("/");
   };
+  useEffect(() => {
+    const token = sessionStorage.getItem("authToken");
+    if (token) {
+      setisLoggedIn(true);
+    }
+  });
 
   return (
     /* NAVBAR */

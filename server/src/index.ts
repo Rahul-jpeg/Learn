@@ -3,12 +3,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
-import path from "path";
 import mongoose from "mongoose";
 import * as dotenv from 'dotenv'
 import adminRoutes from "./routes/admin.js";
 import userRoutes from "./routes/user.js";
-
 
 /* CONFIGURATIONS */
 

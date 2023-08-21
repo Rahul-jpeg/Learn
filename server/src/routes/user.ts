@@ -5,7 +5,9 @@ import {
     currentUserInfo,
     allCourses,
     handleUserLogin,
-    purchaseCourse
+    purchaseCourse,
+    purchaseStatus,
+    getUserSpecificCourse
 } from '../controllers/user.js';
 import { verifyUserToken } from "../middleware/auth.js";
 
@@ -15,6 +17,8 @@ const router = express.Router();
 router.get('/me', verifyUserToken, currentUserInfo);
 router.get('/myCourses', verifyUserToken, getMyCourses);
 router.get('/courses', verifyUserToken, allCourses);
+router.get('/status/:courseId', verifyUserToken, purchaseStatus)
+router.get('/course/:courseId', verifyUserToken, getUserSpecificCourse);
 
 /* POST ROUTES */
 router.post('/signup', handleUserSignup);
